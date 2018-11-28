@@ -1,7 +1,16 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MinifyPlugin = require("babel-minify-webpack-plugin");
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+const path = require('path')
 module.exports = {
+      devServer: {
+          historyApiFallback: true
+        },
     module: {
         rules: [
             {
@@ -45,8 +54,30 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             title:"classroom",
+            hash:false,
             filename:'index.html',
             template:'public/index.html'
-        })
-      ],
+        }),
+        new PreloadWebpackPlugin({
+             rel: 'preload',
+             as(entry) {
+               if (/\.css$/.test(entry)) return 'style';
+               if (/\.woff$/.test(entry)) return 'font';
+               if (/\.png$/.test(entry)) return 'image';
+               return 'script';
+             }
+           }),
+        new MinifyPlugin({}, {comments:false}),
+        new OptimizeCssAssetsPlugin({
+          cssProcessor: require('cssnano'),
+          cssProcessorPluginOptions: {
+            preset: ['default', { discardComments: { removeAll: true } }],
+          },
+          canPrint: true
+        }),
+        new BundleAnalyzerPlugin(),
+        new ServiceWorkerWebpackPlugin({
+         entry: path.join(__dirname, 'src/sw.js'),
+       })
+      ]
 }

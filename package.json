@@ -7,7 +7,7 @@
     "dev": "rm -rf build &&  webpack --env.mode development --watch",
     "build": "rm -rf build && webpack --env.mode production",
     "start:dev": "webpack-dev-server",
-    "pretty":"prettier --single-quote --trailing-comma=es5  --write 'src/*.js' && prettier  --write 'src/style/*.less'"
+    "pretty": "prettier --single-quote --trailing-comma=es5  --write 'src/*.js' && prettier  --write 'src/style/*.less'"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "7.2.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.6",
@@ -24,6 +25,7 @@
     "babel-loader": "^8.0.4",
     "babel-minify-webpack-plugin": "0.3.1",
     "babel-plugin-styled-components": "^1.9.1",
+    "babel-plugin-transform-decorators": "6.24.1",
     "compression-webpack-plugin": "2.0.0",
     "css-loader": "^1.0.1",
     "cssnano": "4.1.7",

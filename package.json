@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "rm -rf build &&  webpack --env.mode development --watch",
     "build": "rm -rf build && webpack --env.mode production",
-    "start:dev": "webpack-dev-server",
+    "start": "webpack-dev-server",
     "pretty": "prettier --single-quote --trailing-comma=es5  --write 'src/*.js' && prettier  --write 'src/style/*.less'"
   },
   "keywords": [],

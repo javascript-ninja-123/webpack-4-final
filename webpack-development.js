@@ -9,7 +9,8 @@ const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const path = require('path')
 module.exports = {
       devServer: {
-          historyApiFallback: true
+          historyApiFallback: true,
+          port:9000
         },
     module: {
         rules: [
